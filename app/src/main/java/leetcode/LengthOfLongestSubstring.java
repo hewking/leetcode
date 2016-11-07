@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
+
 /**
  * Created by hewking on 2016/11/6.
  *
@@ -24,22 +26,23 @@ public class LengthOfLongestSubstring {
         if("".equals(s)){
             return 0;
         }
-        String substr = "";
-        String previousStr  = "";
+        char[] chars = s.toCharArray();
+//        String substr = "";
+        char[] subchars;
         int maxLength = 1;
-        for(int i = 0 ; i < s.length() ; i ++){
-            for (int j = i + 1; j < s.length() ; j ++){
-                substr = s.substring(i,j + 1);
-                if(!subStrWithoutRepeat(substr)){
-                    maxLength = Math.max(substr.length(),previousStr.length());
-                    previousStr = substr;
+        for(int i = 0 ; i < chars.length ; i ++){
+            for (int j = i + 1; j < chars.length ; j ++){
+//                substr = s.substring(i,j + 1);
+                subchars = Arrays.copyOfRange(chars,i,j+1);
+                if(!subStrWithoutRepeat(subchars)){
+                    maxLength = Math.max(subchars.length,maxLength);
                 }
             }
         }
         return maxLength;
     }
 
-    private static boolean subStrWithoutRepeat(String substr) {
+    private static boolean subStrWithoutRepeat(char[] substr) {
 //        int sublength = substr.length();
 //        for(int i = 0 ; i < sublength ; i ++){
 //            char ch = substr.charAt(i);
@@ -49,7 +52,7 @@ public class LengthOfLongestSubstring {
 //        }
 
         boolean isOk = false;
-        char [] tmpchar = substr.toCharArray();
+        char [] tmpchar = substr;
         for (int i = 0; i < tmpchar.length; i++) {
             for (int j = i+1; j < tmpchar.length; j++) {
                 if(tmpchar[i] == tmpchar[j]){
