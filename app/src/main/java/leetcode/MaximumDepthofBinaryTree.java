@@ -24,5 +24,24 @@ class TreeNode {
 }
 
 public class MaximumDepthofBinaryTree {
+    public static void main(String[] args){
+
+    }
+
+    public static int maxDepth(TreeNode root) {
+        int depth = 0;
+
+        return depth;
+    }
+
+    public static int traversal(TreeNode node){
+        if(node == null){
+            return  0;
+        }else{
+            int left = traversal(node.left);
+            int right = traversal(node.right);
+            return 1 + Math.max(left,right);
+        }
+    }
 
 }
