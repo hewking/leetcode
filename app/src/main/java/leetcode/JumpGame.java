@@ -16,7 +16,32 @@ package leetcode;
  */
 public class JumpGame {
 
-    public boolean canJump(int[] nums) {
+    public static void main(String[] args){
+        int[] input = {2,5,0,0};
+        System.out.println(canJump(input) + ":::" + isLast);
+    }
 
+    private static boolean isLast = false;
+
+    public static boolean canJump(int[] nums) {
+
+        boolean boo = jump(nums,0);
+        return boo;
+    }
+
+    private static boolean jump(int[] nums, int i) {
+        int jumpIndex = nums[i];
+        boolean canjump = false;
+        if(i + jumpIndex >= nums.length - 1){
+            isLast = true;
+            return true;
+        }
+        for(int k = 1; k <= jumpIndex; k++ ){
+            if(i + k >= 0){
+                canjump = jump(nums,i + k);
+//                isLast = true;
+            }
+        }
+        return canjump;
     }
 }
