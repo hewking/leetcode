@@ -16,7 +16,11 @@ package leetcode;
  */
 public class BestTimetoBuyandSellStockwithCooldown {
 
-    public int maxProfit(int[] prices) {
+    public static void main(String[] args){
+
+    }
+
+    public static int maxProfit(int[] prices) {
 
 
 
