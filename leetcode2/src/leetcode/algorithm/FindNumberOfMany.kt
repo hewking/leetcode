@@ -33,11 +33,31 @@ object FindNumberOfMany{
     fun main(args : Array<String>) {
         val arr = arrayOf<Int>(1,2,3,1,3,4,3)
 
+        print(findNum(arr))
+
+//        println(0.xor(1))
+//        print(1.xor(0.xor(1)))
 
     }
 
-    fun findNum() {
+    fun findNum(arr : Array<Int>) : Int {
+        // 其中逻辑运算
+        //按位与 &   and
+        // 按位或 |  or
+        // 异或   ^  xor
+        // 非(取反) ~  in
+        // 左移 <<   shl
+        // 右移  >>  shr
+        // 无符号右移 <<<  unshr
 
+        // 与同一个数进行两次异或 还是原值
+        var p = 1
+        arr.forEach {
+            println(it)
+            p = it.xor(p)
+        }
+
+        return p
     }
 
 }
