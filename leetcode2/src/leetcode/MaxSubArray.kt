@@ -18,8 +18,8 @@ object MaxSubArray {
 
     @JvmStatic
     fun main(args : Array<String>) {
-        var array = arrayOf(-2,1,-3,4,-1,2,1,-5,4)
-        println(maxSubArray(array))
+        var array = intArrayOf(-2,1,-3,4,-1,2,1,-5,4)
+        println(maxSubArray2(array))
     }
 
     fun maxSubArray(arr : Array<Int>) : Int{
@@ -38,4 +38,18 @@ object MaxSubArray {
         return maxSub
     }
 
+    fun maxSubArray2(nums: IntArray): Int {
+        var maxSub : Int  = 0
+        var thisSub : Int = 0
+
+        for (i in 0 until nums.size) {
+            thisSub += nums[i]
+            if (thisSub > maxSub) {
+                maxSub = thisSub
+            } else if (thisSub < 0) {
+                thisSub = 0
+            }
+        }
+        return maxSub
+    }
 }
