@@ -20,28 +20,56 @@ object HappyNumber {
 
     @JvmStatic
     fun main(args : Array<String>) {
-        println(isHappy(19))
+        println(happy2(2))
     }
 
-     fun isHappy(n: Int): Boolean {
-        return happy(n) == 1
-    }
+//     fun isHappy(n: Int): Boolean {
+//        return happy2(n) == 1
+//    }
 
     fun happy(n : Int) : Int {
-        if (n == 0) return -1
         var result = n
+        val set = hashSetOf<Int>()
         if (n == 1) {
             result = 1
         } else {
             var sum = 0
             var m = n
-            while (m / 10 > 0) {
-                sum += Math.pow(n.rem(10).toDouble(),2.0).toInt()
-                m /= 10
-            }
 
-            result = happy(sum)
+            do{
+                sum += Math.pow(m.rem(10).toDouble(),2.0).toInt()
+                m /= 10
+            }while(m> 0)
+            println("sum : ${sum}")
+            if (set.contains(sum)) {
+                return sum
+            } else {
+                set.add(sum)
+            }
         }
         return result
+    }
+
+    fun happy2(n : Int) : Boolean {
+        val set = hashSetOf<Int>()
+            var sum = 0
+            var m = n
+
+            while(true) {
+                sum = 0
+                do{
+                    sum += Math.pow(m.rem(10).toDouble(),2.0).toInt()
+                    m /= 10
+                }while(m> 0)
+                println("sum : ${sum}")
+                if (sum == 1) {
+                    return true
+                } else if (set.contains(sum)) {
+                    return false
+                } else {
+                    set.add(sum)
+                    m = sum
+                }
+            }
     }
 }
