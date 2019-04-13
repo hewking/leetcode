@@ -16,7 +16,8 @@ public class ReverseLinkedList {
         linkedList.push(4);
         linkedList.push(5);
         linkedList.push(6);
-        ListNode listNode = linkedList.reverseList(linkedList.head);
+        //1->2->3->4->5->6
+        ListNode listNode = linkedList.reverseLinkedList2(linkedList.head);
         while (listNode.next!= null){
             System.out.println(listNode.next.val);
             listNode = listNode.next;
@@ -47,19 +48,46 @@ public class ReverseLinkedList {
      * @return
      */
 
-    public ListNode reverseList(ListNode head) {
-        ListNode tail = null;
-        while(head.next != null){
-            ListNode listNode = new ListNode(head.next.val);
-            System.out.println(head.next.val);
-            listNode.next = tail;
-            tail = listNode;
-            head = head.next;
+    /**
+     * 递归的方式
+     * @param head
+     * @return
+     */
+    public ListNode reverseList2(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
         }
-        System.out.println("//////////");
-        ListNode node = new ListNode(0);
-        node.next = tail;
-        return node;
+        ListNode next = reverseList2(head.next);
+        head.next.next = head;
+        head.next = null;
+        return next;
+    }
+
+    public ListNode reverseLinkedList(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode pNode = reverseLinkedList(head.next);
+        head.next.next = head;
+        head.next = null;
+        return pNode;
+    }
+
+    public ListNode reverseLinkedList2(ListNode head){
+        if (head == null || head.next == null){
+            return head;
+        }
+        ListNode p = new ListNode(-1);//拟一个头节点
+        p.next = head;
+        ListNode nextNode = head.next;
+        while (nextNode != null){
+            //后一个节点调整到最前
+            head.next = nextNode.next;
+            nextNode.next = p.next;
+            p.next = nextNode;
+            nextNode = head.next;
+        }
+        return p.next;
     }
 
     public class ListNode{
