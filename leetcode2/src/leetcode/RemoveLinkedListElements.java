@@ -12,11 +12,25 @@ package leetcode;
 public class RemoveLinkedListElements {
 
     public ListNode removeElements(ListNode head, int val) {
+        while (head.next != null && head.next.val == val) {
+            head = head.next;
+        }
+        if (head == null) {
+            return head;
+        }
 
+        ListNode node = head;
+        while (node.next.val == node.next.next.val) {
+            ListNode tmp = node.next;
+            node.next = node.next.next;
+            node = tmp;
+        }
+
+        return head;
     }
 
 
-     public class ListNode {
+     public static class ListNode {
           int val;
           ListNode next;
         ListNode(int x) { val = x; }
