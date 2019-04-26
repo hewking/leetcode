@@ -59,7 +59,7 @@ public class MergeTwoSortedLists {
         return head.next;
     }
 
-    public class ListNode {
+    public static class ListNode {
           int val;
           ListNode next;
           ListNode(int x) { val = x; }
