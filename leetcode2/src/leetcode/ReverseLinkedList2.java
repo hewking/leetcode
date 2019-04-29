@@ -40,4 +40,45 @@ public class ReverseLinkedList2 {
         return pNode;
     }
 
+    /**
+     * 1->2->3->4->5->NULL, m = 2, n = 4
+     */
+    public ListNode reverseBetween2(ListNode head, int m, int n) {
+//        ListNode pNode = new ListNode(-1);
+////        pNode.next = head;
+////
+////        for (int i = 1 ; i < m ; i ++) {
+////            head = head.next;
+////        }
+////
+////        // 反转的次数
+////        ListNode nextNode = head.next;
+////        for (int i = m ; i < n ; i ++) {
+////            head.next = nextNode.next;
+////            nextNode.next = head;
+////            pNode.next = nextNode;
+////            nextNode = nextNode.next;
+////        }
+////        return pNode.next;
+
+        ListNode pNode = new ListNode(-1);
+        pNode.next = head;
+        ListNode pre = pNode;
+        for (int i = 1 ; i < m ; i ++) {
+            pre = pre.next;
+        }
+
+        // 反转的次数
+
+        head = pre.next;
+        for (int i = m ; i < n ; i ++) {
+            ListNode nextNode = head.next;
+            head.next = nextNode.next;
+            nextNode.next = pre.next;
+            pre.next = nextNode;
+            //nextNode = head.next;
+        }
+        return pNode.next;
+    }
+
 }
