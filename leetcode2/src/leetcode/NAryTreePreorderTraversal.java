@@ -81,6 +81,6 @@ public class NAryTreePreorderTraversal {
             val = _val;
             children = _children;
         }
-    };
+    }
 
 }
