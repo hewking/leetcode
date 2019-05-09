@@ -58,17 +58,20 @@ public class DesignHashMap {
         /** value will always be non-negative. */
         public void put(int key, int value) {
             // 扩容
-            count ++;
             if (count > size) {
                 int newSize = size * 2;
                 List<Integer>[] newArray = new LinkedList[newSize];
                 for (int i = 0 ; i < size ; i ++) {
                     newArray[i] = array[i];
                 }
+                for (int j = size ; j < newSize ;j ++) {
+                    newArray[j] = new LinkedList<>();
+                }
                 size = newSize;
                 array = newArray;
             }
             array[myHash(key)].add(0,value);
+            count ++;
         }
 
         /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
