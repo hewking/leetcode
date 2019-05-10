@@ -18,7 +18,7 @@ public class CountPrimes {
 
     public int countPrimes(int n) {
         int count = 0;
-        for (int i = 1 ; i < n ; i ++) {
+        for (int i = 2 ; i < n ; i ++) {
             if (isPrime(i)){
                 count ++;
             }
@@ -27,13 +27,14 @@ public class CountPrimes {
     }
 
     public boolean isPrime(int num) {
+        if (num == 2) return true;
         int m = num / 2;
         for (int i = 2 ;i  < m + 1; i ++) {
             if (num % i == 0) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
 }
