@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
+
 /**
  * 路径总和 III
  * https://leetcode-cn.com/problems/path-sum-iii/
@@ -47,7 +49,7 @@ public class PathSumiii {
 //        }
     }
 
-    public boolean isPathSum(TreeNode root ,int sum) {
+    public boolean isPathSum(TreeNode root , int sum) {
         if (root == null) return false;
         if (sum - root.val == 0) {
             return true;

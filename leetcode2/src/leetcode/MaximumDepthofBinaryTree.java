@@ -13,17 +13,20 @@ package leetcode;
  *  给定一个二叉树，查找其最大深度。
  最大深度是沿着从根节点到最远的叶节点的最长路径的节点数
  */
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
 
-    TreeNode(int x) {
-        val = x;
-    }
-}
 
 public class MaximumDepthofBinaryTree {
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int x) {
+            val = x;
+        }
+    }
+
     public static void main(String[] args){
 
     }

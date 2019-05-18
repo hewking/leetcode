@@ -2,6 +2,11 @@ package leetcode
 
 object MaximumDepthOfBinaryTree {
 
+    class TreeNode(var `val`: Int) {
+        var left: TreeNode? = null
+        var right: TreeNode? = null
+    }
+
     @JvmStatic
     fun main(args : Array<String>) {
 
@@ -17,7 +22,3 @@ object MaximumDepthOfBinaryTree {
 
 }
 
-class TreeNode(var `val`: Int) {
-         var left: TreeNode? = null
-         var right: TreeNode? = null
-     }

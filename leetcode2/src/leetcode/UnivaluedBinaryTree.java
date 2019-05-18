@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
+
 /**
  * 单值二叉树
  *

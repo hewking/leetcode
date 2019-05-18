@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
+
 /**
  * Created by test
  * Date 2019/5/4 14:07

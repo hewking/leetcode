@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
+
 /**
  * https://leetcode-cn.com/problems/invert-binary-tree/
  * 翻转一棵二叉树。

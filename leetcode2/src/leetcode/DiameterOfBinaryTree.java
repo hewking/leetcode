@@ -1,5 +1,6 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
 import sun.reflect.generics.tree.Tree;
 
 /**

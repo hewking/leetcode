@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
+
 /**
  *左子叶之和
  * https://leetcode-cn.com/problems/sum-of-left-leaves/

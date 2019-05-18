@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
+
 /**
  * https://leetcode-cn.com/problems/balanced-binary-tree/
  * @program: leetcode

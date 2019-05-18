@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
+
 /**
  * 路径总和
  * https://leetcode-cn.com/problems/path-sum/

@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.TreeNode;
+
 /**
  * 二叉树的坡度
  * https://leetcode-cn.com/problems/binary-tree-tilt/
