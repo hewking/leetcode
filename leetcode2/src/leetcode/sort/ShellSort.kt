@@ -4,7 +4,7 @@ object ShellSort{
     @JvmStatic
     fun main(args : Array<String>) {
         var arr = arrayOf(23,54,23,54,76,28,98,43,4)
-        shell(arr)
+        shellSort(arr)
         arr.forEach {
             print("$it ")
         }
@@ -38,4 +38,26 @@ object ShellSort{
             h = h / 3
         }
     }
+
+    fun shellSort(arr : Array<Int>) {
+
+        var gap = arr.size / 2
+        while(gap > 0) {
+            var i = gap
+            while (i < arr.size) {
+                var j = i
+                val t = arr[i]
+                while (j >= gap && arr[j-gap] > t) {
+                    arr[j] = arr[j-gap]
+                    j -= gap
+                }
+                arr[j] = t
+                i ++
+            }
+
+            gap /= 2
+        }
+
+    }
+
 }
