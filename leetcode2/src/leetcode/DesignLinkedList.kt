@@ -90,28 +90,36 @@ object DesignLinkedList{
                 addAtTail(`val`)
                 return
             }
+            var id = index
+            if (id < 0) {
+                id = index + length + 1
+            }
             val node = ListNode(`val`)
             var t = head
             var i = 0
-            while (t?.next != null && i <= index) {
+            while (t != null && i < id) {
                 t = t?.next
                 i ++
             }
             var n = t?.next
-            node.next = n
             t?.next = node
+            node.next = n
+
             length++
         }
 
         /** Delete the index-th node in the linked list, if the index is valid. */
         fun deleteAtIndex(index: Int) {
+            if (index >= length || index < 0) {
+                return
+            }
             var t = head
             var i = 0
-            while (t?.next != null && i <= index) {
+            while (t != null && i < index) {
                 t = t?.next
                 i ++
             }
-            t = t?.next
+            t?.next = t?.next?.next
             length--
         }
 
