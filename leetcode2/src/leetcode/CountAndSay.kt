@@ -35,8 +35,42 @@ package leetcode
 object CountAndSay {
 
     class Solution {
+        /**
+         * 思路:
+         * 1.首先题目要看懂，说的报数的是n的下一项
+         *2.首先知道传入的n是趟数，所以必定是有n次，第一次已知 可以直接返回结果
+         * 3.用count计数，c作为每次对比的字符的临时变量
+         * 4.每一轮重置 count ,c
+         * 5.从高位开始计数，到每一轮循环的末尾 手动循环外添加 报数结果
+         *
+         */
         fun countAndSay(n: Int): String {
-
+            var s = "1"
+            if (n == 1) return "1"
+            val rs = StringBuffer()
+            var count = 0
+            var c = s[0]
+            for (i in 2 ..n) {
+                count = 0
+                c = s[0]
+                for (j in 0 until s.length){
+                    if (c == s[j]) {
+                        count ++
+                    } else {
+                        rs.append(count)
+                        rs.append(c)
+                        c = s[j]
+                        count = 1
+                    }
+                    if (j == s.length -1) {
+                        rs.append(count)
+                        rs.append(c)
+                    }
+                }
+                s = rs.toString()
+                rs.delete(0,rs.length)
+            }
+            return s
         }
     }
 
