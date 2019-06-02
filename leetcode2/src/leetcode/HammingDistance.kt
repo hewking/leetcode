@@ -28,8 +28,34 @@ package leetcode
  */
 object HammingDistance {
 
+    @JvmStatic
+    fun main(args : Array<String>) {
+        val s = Solution()
+//        print(s.toB(5))
+        s.hammingDistance(1,4)
+    }
 
     class Solution {
+
+        /**
+         * 思路:
+         * 1.先进行异或操作，所得结果中的1的个数即为所得
+         * 2.统计1的个数，通过mod 2 如果为0则是二进制结果中的1
+         * 3.循环往复
+         */
+        fun hammingDistance2(x : Int,y : Int) : Int {
+            var r = x.xor(y)
+            var count = 0
+            while (r > 0) {
+                count += r.rem(2)
+                r = r.shr(1)
+            }
+            return count
+        }
+
+        /**
+         * 土办法，先计算整数的二进制，然后累加不同的数的个数
+         */
         fun hammingDistance(x: Int, y: Int): Int {
             val s1 = toB(x)
             val s2 = toB(y)
@@ -45,7 +71,7 @@ object HammingDistance {
                     }
 
                 } else {
-                    if (s[i] != s3[i - s3.length]) {
+                    if (s[i] != s3[i - (s.length -s3.length)]) {
                         count ++
                     }
                 }
@@ -62,7 +88,7 @@ object HammingDistance {
                 sb.append(x.rem(2))
                 x /= 2
             }
-            return sb.toString()
+            return sb.toString().reversed()
         }
     }
 }
