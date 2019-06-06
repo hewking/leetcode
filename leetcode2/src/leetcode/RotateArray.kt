@@ -32,7 +32,7 @@ package leetcode
 链接：https://leetcode-cn.com/problems/rotate-array
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-object RotateArray{
+object RotateArray {
 
     class Solution {
         /**
@@ -59,11 +59,12 @@ object RotateArray{
                 val tmp = nums.last()
                 var i = nums.size - 1
                 while (i > 0) {
-                    nums[i] = nums[i-1]
+                    nums[i] = nums[i - 1]
                     i--
                 }
                 nums[0] = tmp
             }
         }
 
+    }
 }
