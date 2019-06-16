@@ -58,6 +58,37 @@ object IntersectionOfTwoArraysII{
 
             return arrList.toIntArray()
         }
-    }
+
+        fun intersect2(nums1: IntArray, nums2: IntArray): IntArray {
+            val arrList = mutableListOf<Int>()
+            Arrays.sort(nums1)
+            Arrays.sort(nums2)
+
+            val minArr = if (nums1.size > nums2.size) nums2 else nums1
+            val maxArr = if (nums1.size > nums2.size) nums1 else nums2
+
+            var j = 0
+            var i = 0
+            while (i < minArr.size && j < maxArr.size) {
+                if (i != 0 ) {
+                    while (i < minArr.size && minArr[i] == minArr[i-1]) {
+                        i ++
+                    }
+                }
+                while (i < minArr.size && j < maxArr.size && minArr[i] != maxArr[j]) {
+                    j++
+                }
+                if (j >= maxArr.size || i >= maxArr.size) {
+                    return arrList.toIntArray()
+                }
+                if(i < minArr.size){
+                    arrList.add(minArr[i])
+                }
+                i ++
+            }
+
+            return arrList.toIntArray()
+        }
+        }
 
 }
