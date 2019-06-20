@@ -8,7 +8,8 @@ import leetcode.structure.TreeNode
  * Created by test
  * Date 2019/6/18 0:56
  * Description
- * 给定一个非空特殊的二叉树，每个节点都是正数，并且每个节点的子节点数量只能为 2 或 0。如果一个节点有两个子节点的话，那么这个节点的值不大于它的子节点的值。 
+ * 给定一个非空特殊的二叉树，每个节点都是正数，并且每个节点的子节点数量只能为 2 或 0。
+ * 如果一个节点有两个子节点的话，那么这个节点的值不大于它的子节点的值。 
 
 给出这样的一个二叉树，你需要输出所有节点中的第二小的值。如果第二小的值不存在的话，输出 -1 。
 
@@ -44,19 +45,25 @@ object SecondMiniimumNodeInABinaryTree {
          * 思路:
          * 1.因为题设子节点只有0，2两种，并且子节点大于等于父节点
          * 所以有子节点的情况下，两个子节点和父节点一共三个，必有第二大的，否则就没有
+         * 2.根据题设可知，第一个节点是最小的，所以只需要找到第一个比第一个节点大的树就可以了
+         * 3.题目就变成找到第一个大于第一个节点的数
          */
         fun findSecondMinimumValue(root: TreeNode?): Int {
-            var ans = -1
-            if (root != null) {
-                val a = root.`val`
-                val b = findSecondMinimumValue(root.left)
-                val c = findSecondMinimumValue(root.right)
-                val arr = arrayOf(a,b,c)
-                ans =
-            } else {
-                return  -1
+            if (root == null) return -1
+            return findValue(root,root?.`val`)
+        }
+
+        fun findValue(root: TreeNode?, value : Int) : Int{
+            root?:return -1
+            if (root.`val` > value ) return root.`val`
+            val l = findValue(root.left,value)
+            val r = findValue(root.right,value)
+            if (l == r && l == -1) {
+                return -1
             }
-            return ans
+            if (l == -1) return r
+            if (r == -1) return l
+            return Math.min(l,r)
         }
     }
 
