@@ -18,6 +18,8 @@ import java.util.*
 输入:
 [4,3,2,7,8,2,3,1]
 
+排序后：
+[1,2,2,3,3,4,7,8]
 输出:
 [5,6]
 
@@ -37,12 +39,50 @@ object FindAllNumbersDisappearedInAnArray {
         fun findDisappearedNumbers(nums: IntArray): List<Int> {
             val result = mutableListOf<Int>()
             Arrays.sort(nums)
-            for (i in 1 .. nums.size) {
-                if (Arrays.binarySearch(nums,i) < 0) {
+            for (i in 1..nums.size) {
+                if (Arrays.binarySearch(nums, i) < 0) {
                     result.add(i)
                 }
             }
             return result
         }
+
+        /**
+         * 思路：
+         * 置所有数组正整数值为下标，把所有值作为下标的值设
+         * 为负数，
+         */
+        fun findDisappearedNumbers3(nums: IntArray): List<Int> {
+            val result = mutableListOf<Int>()
+            for (i in 0 until nums.size) {
+                var index = Math.abs(nums[i]) -1
+                nums[index] = - Math.abs(nums[index])
+            }
+            for (i in 0 until nums.size) {
+                if (nums[i] > 0) {
+                    result.add(i + 1)
+                }
+            }
+            return result
+        }
+
+//        fun findDisappearedNumbers2(nums: IntArray): List<Int> {
+//            val result = mutableListOf<Int>()
+//            Arrays.sort(nums)
+//            var curIndex = 0
+//            for (i in 1..nums.size) {
+//                if (i == nums[curIndex]) {
+//                    curIndex++
+//                    continue
+//                } else if (i > nums[curIndex]) {
+//                    while (i > nums[curIndex]) {
+//                        curIndex++
+//                    }
+//                } else if (i < nums[curIndex]) {
+//                    result.add(nums[i - 1])
+//                }
+//            }
+//            return result
+//        }
     }
 }
