@@ -35,6 +35,11 @@ object Sqrt {
     }
 
     class Solution {
+
+        /**
+         * 思路：
+         * 理论上可行这种方式，可是相乘会导致结果超出Int上限，导致错误
+         */
         fun mySqrt(x: Int): Int {
             for (i in 1 until (x + 1)) {
                 if (i * i == x) {
@@ -45,5 +50,32 @@ object Sqrt {
             }
             return 0
         }
-    }
+
+        /**
+         * 思路:
+         * 1. 通过二分查找思想，找出中间数，然后平方
+         * 2.根据平方结果与x值进行比较
+         */
+        fun mySqrt2(x: Int): Int {
+            if ( x < 2) {
+                return x
+            }
+            return sqrt(x,0,x)
+        }
+
+        fun sqrt(x: Int,low: Int,high: Int): Int{
+            if (low > high) {
+                return high
+            }
+            var m = (low + high) / 2
+            if (m > x / m) {
+                return sqrt(x,low , m - 1)
+            } else if (m < x / m) {
+                return sqrt(x,m + 1 , high)
+            } else {
+                return m
+            }
+        }
+
+        }
 }
