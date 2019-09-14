@@ -18,7 +18,7 @@ package leetcode
 
 https://blog.csdn.net/jerry99s/article/details/46485417 异或的解释，不进位加法，相同为0，不同为1
  交换律
- 结合律 a xor (b xor c) == (a xor b) xorc
+ 结合律 a xor (b xor c) == (a xor b) xor c
  自反性 a xor b xor b = a xor 0 = a
  */
 object SingleNumber {
