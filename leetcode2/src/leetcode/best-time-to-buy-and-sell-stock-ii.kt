@@ -56,8 +56,8 @@ object BestTimeTOBuyAndSellStockII {
             var valley = prices[0]
             var maxProfit = 0
             while (i < prices.size - 1) {
-                while(i < prices.size - 1 && prices[i] >= prices[i + 1]) {
-                    i ++
+                while (i < prices.size - 1 && prices[i] >= prices[i + 1]) {
+                    i++
                 }
                 valley = prices[i]
                 while (i < prices.size - 1 && prices[i] <= prices[i + 1])
@@ -76,10 +76,10 @@ object BestTimeTOBuyAndSellStockII {
             var maxProfit = 0
             for (i in 1 until prices.size) {
                 if (prices[i] > prices[i - 1]) {
-                    maxProfit += prices[i] - prices[i -1]
+                    maxProfit += prices[i] - prices[i - 1]
                 }
             }
             return maxProfit
         }
-
+    }
 }
