@@ -63,18 +63,18 @@ object EvaluateReversePolishNotation {
                         stack.push(left + right)
                     }
                     "-" -> {
-                        val left = stack.pop()
                         val right = stack.pop()
-                        stack.push((left - right))
+                        val left = stack.pop()
+                        stack.push(left - right)
                     }
                     "*" -> {
                         val left = stack.pop()
                         val right = stack.pop()
-                        stack.push((left * right))
+                        stack.push(left * right)
                     }
                     "/" -> {
-                        val left = stack.pop()
                         val right = stack.pop()
+                        val left = stack.pop()
                         if (right != 0) {
                             stack.push((left / right).toInt())
                         } else {
