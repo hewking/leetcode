@@ -43,6 +43,12 @@ object NextGreaterElementI {
     }
 
     class Solution {
+        /**
+         * 思路：
+         * 1. 原题是用栈的，但是我不会，现在这种方式更简单，只是时间复杂度O(n^2)
+         * 2. 通过遍历nums1 ,并且都在nums2 中，然后通过 nums2.indexOf 获取 相对应的在
+         * nums2 中位置，然后从该位置遍历到nums2 最后。找到大于nums1 中值的元素，没有则赋值为-1
+         */
         fun nextGreaterElement(nums1: IntArray, nums2: IntArray): IntArray {
             val ans = IntArray(nums1.size)
             nums1.forEachIndexed { index, i ->
