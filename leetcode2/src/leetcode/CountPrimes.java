@@ -37,4 +37,23 @@ public class CountPrimes {
         return true;
     }
 
+    /**
+     * 厄拉多塞筛法
+     * @param n
+     * @return
+     */
+    public int countPrimes2(int n) {
+        int count = 0;
+        boolean[] primes = new boolean[n];
+        for (int i = 2 ; i < n ; i ++) {
+            if (!primes[i]) {
+                count ++;
+                for (int j = i + i ; j < n ; j += i) {
+                    primes[j] = true;
+                }
+            }
+        }
+        return count;
+    }
+
 }
