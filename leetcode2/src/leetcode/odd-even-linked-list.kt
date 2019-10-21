@@ -32,8 +32,23 @@ import leetcode.structure.ListNode
  **/
 object OddEvenLinkedList {
     class Solution {
+        /**
+         * 思路：
+         * 解决链表问题最好的办法是在脑中或者纸上把链表画出来。
+         * 画个图 就一目了然了
+         */
         fun oddEvenList(head: ListNode?): ListNode? {
-
+            var p1 = head
+            var p2 = head?.next
+            var evenP1 = head?.next
+            while (p2?.next != null) {
+                p1?.next = p2.next
+                p1 = p2.next
+                p2.next = p1.next
+                p2 = p1.next
+            }
+            p1?.next = evenP1
+            return head
         }
     }
 }
