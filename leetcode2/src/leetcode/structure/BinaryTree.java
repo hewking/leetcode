@@ -163,6 +163,10 @@ public class BinaryTree<T extends Comparable> {
     private BinaryTree<T> left;
     private BinaryTree<T> right;
 
+    /**
+     * 二叉搜索树的插入
+     * @param value
+     */
     public void insert(T value) {
         if (data == null) {
             this.data = value;

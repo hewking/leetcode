@@ -13,4 +13,12 @@ public class TreeNode {
     public TreeNode(int x) {
         val = x;
     }
+
+    public void insert(int data){
+        if (left == null){
+            this.left = new TreeNode(data);
+        } else if (right == null) {
+            this.right = new TreeNode(data);
+        }
+    }
 }

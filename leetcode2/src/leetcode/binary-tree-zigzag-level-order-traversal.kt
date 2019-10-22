@@ -1,6 +1,7 @@
 package leetcode
 
 import leetcode.structure.TreeNode
+import java.util.*
 
 /**
  * 103. 二叉树的锯齿形层次遍历
@@ -32,7 +33,33 @@ import leetcode.structure.TreeNode
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  **/
 object BinaryTreeZigzagLevelOrderTraversal {
-    fun zigzagLevelOrder(root: TreeNode?): List<List<Int>> {
 
+    fun zigzagLevelOrder(root: TreeNode?): List<List<Int>> {
+        root?: return mutableListOf()
+        val list = mutableListOf<List<Int>>()
+        val queue = ArrayDeque<TreeNode?>()
+        queue.add(root)
+        var isLeft = true
+        while (queue.size > 0) {
+            var len = queue.size
+            val values = mutableListOf<Int>()
+            while (len > 0) {
+                val node = queue.poll()
+                if (node?.left != null) {
+                    queue.add(node?.left)
+                }
+                if (node?.right != null) {
+                    queue.add(node?.right)
+                }
+                len --
+                values.add(node!!.`val`)
+            }
+            if (!isLeft) {
+                values.reverse()
+            }
+            list.add(values)
+            isLeft = !isLeft
+        }
+        return list
     }
 }
