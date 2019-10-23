@@ -1,0 +1,79 @@
+package leetcode
+
+import leetcode.structure.TreeNode
+
+/**
+ * 783. 二叉搜索树结点最小距离
+ * https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes/
+ * @program: leetcode
+ * @description: ${description}
+ * @author: hewking
+ * @create: 2019-10-23 09:18
+ * 给定一个二叉搜索树的根结点 root, 返回树中任意两节点的差的最小值。
+
+示例：
+
+输入: root = [4,2,6,1,3,null,null]
+输出: 1
+解释:
+注意，root是树结点对象(TreeNode object)，而不是数组。
+
+给定的树 [4,2,6,1,3,null,null] 可表示为下图:
+
+4
+/   \
+2      6
+/ \
+1   3
+
+最小的差值是 1, 它是节点1和节点2的差值, 也是节点3和节点2的差值。
+注意：
+
+二叉树的大小范围在 2 到 100。
+二叉树总是有效的，每个节点的值都是整数，且不重复。
+
+来源：力扣（LeetCode）
+链接：https://leetcode-cn.com/problems/minimum-distance-between-bst-nodes
+著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ **/
+object MinimumDIstanceBetweenBstNodes {
+
+    class Solution {
+
+        /**
+         * 思路：
+         * 根据二叉搜索树的性质，还有题设。相邻父子节点之间的值符合
+         * 题设所要求的的值。然后所有相邻值取最小值。
+         * 采用递归：
+         * 1. 基线条件：子节点为null
+         * 2. 递归条件：当前最小值和 父节点和两个子节点的差值，然后取最小
+         */
+        fun minDiffInBST(root: TreeNode?): Int {
+            minDiffValue = root!!.`val`
+            minDiff(root,root!!.`val`)
+            return minDiffValue
+        }
+
+        private var minDiffValue: Int = -1
+
+        fun minDiff(root: TreeNode?,min: Int) {
+            root?:return
+            val leftVal = root?.left?.`val`
+            val rightVal =root?.right?.`val`
+            val minVal = if (leftVal == null && rightVal == null) {
+                root.`val`
+            } else if (leftVal == null){
+                rightVal
+            } else if (rightVal == null){
+                leftVal
+            } else {
+                Math.min(root.`val` - leftVal,rightVal - root.`val`)
+            }
+            minDiff(root?.left,min)
+            minDiff(root?.right,min)
+            minDiffValue = Math.min(minDiffValue,minVal!!)
+//            Math.min(Math.min(minVal,minDiff(root?.left,minVal)),Math.min(minVal,minDiff(root?.right,minVal)))
+        }
+    }
+
+}

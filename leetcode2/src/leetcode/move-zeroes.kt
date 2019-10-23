@@ -28,6 +28,7 @@ object MoveZeroes {
         /**
          * 思路：
          * 参考冒泡排序，把0 冒到最后的位置
+         * 时间复杂度： O(n^2)
          */
         fun moveZeroes(nums: IntArray): Unit {
             for (i in 0 until nums.size) {
