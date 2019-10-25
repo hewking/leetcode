@@ -41,6 +41,11 @@ T_4 = 1 + 1 + 2 = 4
 object NThTribonacciNumber {
 
     class Solution {
+
+        /**
+         * 思路：
+         * 递归，但是性能不好，采用循环
+         */
         fun tribonacci(n: Int): Int {
             if ( n == 0) {
                 return 0
@@ -50,6 +55,27 @@ object NThTribonacciNumber {
             }
             return tribonacci(n - 1) + tribonacci(n - 2) + tribonacci(n - 3)
         }
+
+
+        fun tribonacci2(n: Int): Int {
+            if ( n == 0) {
+                return 0
+            }
+            if (n == 1 || n == 2) {
+                return 1
+            }
+            var a = 0
+            var b = 1
+            var c = 1
+            for (i in 3 .. n) {
+                val tmp = a + b + c
+                a = b
+                b = c
+                c = tmp
+            }
+            return c
+        }
+
     }
 
 }
