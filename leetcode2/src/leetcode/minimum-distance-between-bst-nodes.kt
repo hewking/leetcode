@@ -47,6 +47,8 @@ object MinimumDIstanceBetweenBstNodes {
          * 采用递归：
          * 1. 基线条件：子节点为null
          * 2. 递归条件：当前最小值和 父节点和两个子节点的差值，然后取最小
+         *
+         * 3. 二叉搜索树中序遍历 所有节点值从小到大
          */
         fun minDiffInBST(root: TreeNode?): Int {
             minDiffValue = root!!.`val`

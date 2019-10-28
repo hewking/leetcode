@@ -37,7 +37,7 @@ object RotateArray {
     class Solution {
         /**
          * 思路：
-         * 第一种解法
+         * 第一种解法: 错误的解法，还未完成
          */
         fun rotate(nums: IntArray, k: Int): Unit {
             val len = nums.size
