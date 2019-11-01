@@ -26,7 +26,36 @@ object GenerateParentheses {
     class Solution {
         fun generateParenthesis(n: Int): List<String> {
             val ans = mutableListOf<String>()
+            generateAll(CharArray(2 * n),0,ans)
             return ans
+        }
+
+        fun generateAll(charArr : CharArray,pos: Int,ans: MutableList<String>) {
+            if (pos == charArr.size - 1) {
+                if (isValid(charArr)) {
+                    ans.add(String(charArr))
+                }
+            } else {
+                charArr[pos] = '('
+                generateAll(charArr,pos + 1,ans)
+                charArr[pos] = ')'
+                generateAll(charArr,pos + 1, ans)
+            }
+        }
+
+        fun isValid(charArr: CharArray) : Boolean{
+            var balance = 0
+            for (ch in charArr) {
+                if (ch == '(') {
+                    balance ++
+                } else {
+                    balance --
+                }
+                if (balance < 0) {
+                    return false
+                }
+            }
+            return balance == 0
         }
     }
 
