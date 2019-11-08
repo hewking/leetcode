@@ -1,5 +1,7 @@
 package leetcode
 
+import kotlin.math.max
+
 /**
  * 5. 最长回文子串
  * https://leetcode-cn.com/problems/longest-palindromic-substring/
@@ -67,6 +69,50 @@ object LongestPalindromicSubstring {
             }
             return true
         }
+
+        /**
+         * 以下为中心拓展算法
+         * ***********************************************
+         * 思路：
+         * 1. 从某个字符作为中心的位置出发
+         * 2. 往两边遍历，然后对比是否一致
+         * 3. 会有两种情况，中心为一个，比如 aba 或者中心在之间的情况 abba 两种情况
+         * 这样就会有 n + n - 1  = 2 * n -1 个中心
+         * 4. 找出回文子串最大长度
+         * 5. 找出在原始字符串中的位置
+         * 6. 获取最长回文子串
+         */
+        fun longestPalindrome2(s: String): String {
+            if (s.isEmpty()) {
+                return  s;
+            }
+            var start = 0
+            var end = 0
+            for (i in 0 until s.length) {
+                var len = this.expandAroundCenter(s,i,i)
+                val len2 = this.expandAroundCenter(s,i,i + 1)
+                len = max(len, len2)
+                if ( len > end - start) {
+                    start = i - (len - 1) / 2
+                    end = i + len / 2
+                }
+            }
+            return s.substring(start,end)
+        }
+
+        /**
+         *  获取从中间出发的长度。
+         */
+        fun expandAroundCenter(s: String, left: Int,right: Int) : Int{
+            var L = left
+            var R = right
+            while (L >= 0 && R < s.length && s[L] == s[R]) {
+                L --
+                R ++
+            }
+            return R - L - 1
+        }
+
     }
 
 
