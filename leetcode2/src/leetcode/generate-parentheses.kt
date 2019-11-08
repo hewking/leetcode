@@ -51,6 +51,7 @@ object GenerateParentheses {
                 } else {
                     balance --
                 }
+                // 确保 （ 号在左边
                 if (balance < 0) {
                     return false
                 }
@@ -62,5 +63,5 @@ object GenerateParentheses {
 }
 
 fun main() {
-
+    println(GenerateParentheses.Solution().generateParenthesis(2));
 }
