@@ -51,30 +51,23 @@ object MinimumDIstanceBetweenBstNodes {
          * 3. 二叉搜索树中序遍历 所有节点值从小到大
          */
         fun minDiffInBST(root: TreeNode?): Int {
-            minDiffValue = root!!.`val`
-            minDiff(root,root!!.`val`)
+            minDiff(root)
             return minDiffValue
         }
 
-        private var minDiffValue: Int = -1
+        private var minDiffValue: Int = Int.MAX_VALUE
+        private var preNode: TreeNode? = null
 
-        fun minDiff(root: TreeNode?,min: Int) {
+        fun minDiff(root: TreeNode?) {
             root?:return
-            val leftVal = root?.left?.`val`
-            val rightVal =root?.right?.`val`
-            val minVal = if (leftVal == null && rightVal == null) {
-                root.`val`
-            } else if (leftVal == null){
-                rightVal
-            } else if (rightVal == null){
-                leftVal
-            } else {
-                Math.min(root.`val` - leftVal,rightVal - root.`val`)
+            minDiff(root?.left)
+            var minVal = minDiffValue
+            if (preNode != null) {
+                minVal = root?.`val` - preNode!!.`val`
             }
-            minDiff(root?.left,min)
-            minDiff(root?.right,min)
-            minDiffValue = Math.min(minDiffValue,minVal!!)
-//            Math.min(Math.min(minVal,minDiff(root?.left,minVal)),Math.min(minVal,minDiff(root?.right,minVal)))
+            preNode = root
+            minDiffValue = Math.min(minDiffValue,minVal)
+            minDiff(root?.right)
         }
     }
 
