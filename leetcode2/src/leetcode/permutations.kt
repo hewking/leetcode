@@ -1,5 +1,7 @@
 package leetcode
 
+import java.util.*
+
 /**
  * 46. 全排列
  * https://leetcode-cn.com/problems/permutations/
@@ -25,8 +27,35 @@ package leetcode
 
 object Permutations {
     class Solution {
+
+        /**
+         *  思路：
+         *  排列组合总数 A3 ^ 3
+         *
+         *  回溯法注意三点： 1. 要对所有候选解进行遍历
+         *                  2. 候选解不符合条件 则返回上一步，再进行下一步
+         *                    3. 需要一个标志，结束
+         */
         fun permute(nums: IntArray): List<List<Int>> {
-            return mutableListOf()
+            val list = mutableListOf<List<Int>>()
+            if(nums.size == 1) {
+                list.add(nums.toMutableList())
+            } else {
+                backTrack(nums.size,list , nums.toList(),0)
+            }
+            return list
+        }
+
+        fun backTrack(n: Int,nums: MutableList<List<Int>>,list: List<Int>,first: Int) {
+            if (n == first) {
+                nums.add(list.toMutableList())
+            } else {
+                for (i in first until n) {
+                    Collections.swap(list,first,i)
+                    backTrack(n,nums,list,first + 1)
+                    Collections.swap(list,first,i)
+                }
+            }
         }
     }
 }
