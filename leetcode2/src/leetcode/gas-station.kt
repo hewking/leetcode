@@ -64,7 +64,6 @@ object GasStation {
 
         /**
          * 思路：
-         * 贪心算法
          * 真的牛逼的解法
          * https://leetcode-cn.com/problems/gas-station/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--30/
          */
@@ -83,6 +82,26 @@ object GasStation {
             }
             return -1
         }
-    }
+
+        /**
+         * 贪心算法思路：
+         * 1. 必须总油量大于消耗
+         * 2. 如果gas[i] - cost[i] < 0 无法到达下一个加油站，则重新开始 选择当前加油站
+         */
+        fun canCompleteCircuit2(gas: IntArray, cost: IntArray): Int {
+            var total = 0
+            var start = 0
+            var remain = 0
+            for (i in 0 until gas.size) {
+                total += gas[i] - cost[i]
+                if (remain < 0) {
+                    remain = gas[i] - cost[i]
+                    start = i
+                } else {
+                    remain += gas[i] - cost[i]
+                }
+            }
+            return if (total >= 0) start else -1
+        }
 
 }
