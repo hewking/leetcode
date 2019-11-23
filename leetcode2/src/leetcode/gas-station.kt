@@ -55,9 +55,33 @@ cost = [3,4,3]
  */
 object GasStation {
 
-    class Solution {
-        fun canCompleteCircuit(gas: IntArray, cost: IntArray): Int {
+    @JvmStatic
+    fun main(args: Array<String>) {
 
+    }
+
+    class Solution {
+
+        /**
+         * 思路：
+         * 贪心算法
+         * 真的牛逼的解法
+         * https://leetcode-cn.com/problems/gas-station/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--30/
+         */
+        fun canCompleteCircuit(gas: IntArray, cost: IntArray): Int {
+            val n = gas.size
+            for (i in 0 until n) {
+                var remain = gas[i]
+                var j = i
+                while (remain - cost[j] >= 0) {
+                    remain = remain - cost[j] + gas[(j + 1)% n]
+                    j = (j + 1) % n
+                    if (i == j) {
+                        return i
+                    }
+                }
+            }
+            return -1
         }
     }
 
