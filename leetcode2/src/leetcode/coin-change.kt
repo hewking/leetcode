@@ -58,6 +58,76 @@ object CoinChange {
             }
             return -1
         }
+
+        /**
+         * 带备忘录的解法
+         * 1. 状态转移公式：
+         * f(n) = {0 ,n = 0
+         *  1+ min{ f(n - ci) , i 属于 [0,k]}
+         * }
+         * n为金额
+         * ci 为币值
+         */
+        fun coinChange2(coins: IntArray, amount: Int): Int {
+            val memo = IntArray(amount + 1)
+            memo.forEachIndexed { index, i ->
+                memo[index] = -2
+            }
+            return coin2(0,coins,amount,memo)
+        }
+
+        fun coin2(coinIndx: Int,coins: IntArray,amount: Int,memo: IntArray): Int {
+            if (amount == 0) {
+                return 0
+            } else {
+                if (memo[amount] != -2) return memo[amount]
+                if (coinIndx < coins.size && amount > 0) {
+                    val maxCoin = amount / coins[coinIndx]
+                    var minCost = Int.MAX_VALUE
+                    for (i in 0..maxCoin) {
+                        if (amount >= coins[coinIndx] * coinIndx) {
+                            val res = coin2(coinIndx + 1, coins, amount - coins[coinIndx] * i, memo)
+                            if (res != -1) {
+                                minCost = Math.min(minCost, res + i)
+                            }
+                        }
+                    }
+                    return if (minCost == Int.MAX_VALUE) {
+                        -1
+                    } else {
+                        memo[amount] = minCost
+                        memo[amount]
+                    }
+                }
+                return -1
+            }
+        }
+
+
+
+
     }
 
+    fun coinChange3(coins: IntArray, amount: Int): Int {
+        val dp = IntArray(amount + 1)
+        dp.forEachIndexed { index, i ->
+            dp[index] = amount + 1
+    }
+        dp[0] = 0
+        for (i in 1 .. amount) {
+            for (coin in coins) {
+                if (coin <= i) {
+                    dp[i] = Math.min(dp[i],dp[i - coin] + 1)
+                }
+            }
+        }
+        return if (dp[amount] > amount) -1 else dp[amount]
+    }
+
+
+    @JvmStatic
+    fun main(args: Array<String>) {
+
+        println(coinChange3(intArrayOf(1,2,5),11))
+    }
 }
