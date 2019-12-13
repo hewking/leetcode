@@ -73,7 +73,7 @@ object GasStation {
                 var remain = gas[i]
                 var j = i
                 while (remain - cost[j] >= 0) {
-                    remain = remain - cost[j] + gas[(j + 1)% n]
+                    remain = remain - cost[j] + gas[(j + 1) % n]
                     j = (j + 1) % n
                     if (i == j) {
                         return i
@@ -104,4 +104,5 @@ object GasStation {
             return if (total >= 0) start else -1
         }
 
+    }
 }
