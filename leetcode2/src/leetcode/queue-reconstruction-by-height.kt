@@ -36,10 +36,9 @@ object QueueReconstructionByHeight {
             重新排队
             [[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]
 
-         先排序，再插入，因为插入到已排好的队列，每个人都要比要排的人要高
-         所以就只需要排下一个人看有多少人比他高，然后就插入到相应位置
+         先排序，再插入。it[1] 是指多少人比他高，所以这就是正确的位置，就在多少人，的位置插入
+         就只需要排下一个人看有多少人比他高，然后就插入到相应位置
          */
-
         fun reconstructQueue(people: Array<IntArray>): Array<IntArray> {
             people.sortWith(Comparator{ o1, o2 ->
                 if (o1[0] == o2[0]) o1[1] - o2[1] else o2[0] - o1[0]

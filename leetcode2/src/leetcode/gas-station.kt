@@ -75,6 +75,7 @@ object GasStation {
                 while (remain - cost[j] >= 0) {
                     remain = remain - cost[j] + gas[(j + 1) % n]
                     j = (j + 1) % n
+                    // 相当于绕了一圈了
                     if (i == j) {
                         return i
                     }
@@ -85,7 +86,7 @@ object GasStation {
 
         /**
          * 贪心算法思路：
-         * 1. 必须总油量大于消耗
+         * 1. 必须总油量大于消耗,代表一定可以完成行驶，接下来就是找最开始位置
          * 2. 如果gas[i] - cost[i] < 0 无法到达下一个加油站，则重新开始 选择当前加油站
          */
         fun canCompleteCircuit2(gas: IntArray, cost: IntArray): Int {
