@@ -46,7 +46,7 @@ object UniquePaths {
          */
         fun uniquePaths(m: Int, n: Int): Int {
             if (m <= 0 || n <= 0) {
-                return 0;
+                return 0
             }
             val more = max(m, n)
             val less = min(m, n)
