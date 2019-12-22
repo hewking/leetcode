@@ -54,17 +54,40 @@ object WordBreak{
          * 1. 获取字符串s的子串
          */
         fun wordBreak(s: String, wordDict: List<String>): Boolean {
-            return backTrack(s, wordDict.toHashSet(),0)
+            return backTrack(s, wordDict.toHashSet(),0, BooleanArray(s.length))
         }
 
-        fun backTrack(s:String,wordDict:HashSet<String>,start:Int): Boolean {
+        fun backTrack(s:String,wordDict:HashSet<String>,start:Int,memo:BooleanArray): Boolean {
             if (start == s.length) return true
+            if(memo[start]) {
+                return true
+            }
             for (end in start + 1 .. s.length){
-                if (wordDict.contains(s.substring(start,end)) && backTrack(s,wordDict,end)) {
+                if (wordDict.contains(s.substring(start,end)) && backTrack(s,wordDict,end,memo)) {
+                    memo[start] = true
                     return true
                 }
             }
+            memo[start] = false
             return false
+        }
+
+        /**
+         * 动态规划版本题解
+         */
+        fun wordBreak2(s: String, wordDict: List<String>): Boolean {
+            val set = wordDict.toSet()
+            val dp = BooleanArray(s.length + 1)
+            dp[0] = true
+            for (i in 1 .. s.length) {
+                for (j in 0 until i) {
+                    if (dp[j] && set.contains(s.substring(j,i))) {
+                        dp[i] = true
+                        break
+                    }
+                }
+            }
+            return dp[s.length]
         }
     }
 
