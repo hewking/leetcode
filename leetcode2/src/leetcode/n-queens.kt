@@ -1,5 +1,8 @@
 package leetcode
 
+import java.lang.StringBuilder
+import java.util.*
+
 /**
  * 51. N皇后
  * https://leetcode-cn.com/problems/n-queens/
@@ -43,23 +46,91 @@ object NQueue {
         /**
          * 存放答案
          */
-        val ans = mutableListOf<String>()
-        val lists = mutableListOf<List<String>>()
+        val ans = mutableListOf<List<String>>()
 
         /**
          * 思路：
          * https://leetcode-cn.com/problems/n-queens/solution/javahui-su-fa-si-lu-jian-dan-qing-xi-qing-kan-dai-/
          * 回溯法
+         * 大佬讲解
+         * https://leetcode-cn.com/problems/n-queens/solution/hui-su-suan-fa-xiang-jie-by-labuladong/
          */
         fun solveNQueens(n: Int): List<List<String>> {
             var res = ""
             for (i in 0 until n) {
                 res += '.'
             }
-
-            return lists
+            val queens = mutableListOf<String>()
+            for (j in 0 until n) {
+                queens.add((res))
+            }
+            backTrack(0,queens)
+            return ans
         }
 
-        fun queens(n: Int ,y : B)
+        /**
+         * 回溯法框架
+         * res = []
+         * backTrack(路径，选择列表){
+         *  if 满足条件
+         *  res.add(路径)
+         *  return
+         *  for(选择 in 选择列表) {
+         *   做选择
+         *   backTrack(路径，选择列表)
+         *   撤销选择
+         * }
+         */
+        fun backTrack(row: Int ,queens: MutableList<String>) {
+            if (queens.size == row) {
+                ans.add(queens)
+                return
+            }
+            val n = queens[row].length
+            for (col in 0 until n) {
+                if (!isValid(queens,row,col)) {
+                    continue
+                }
+                val sb = StringBuilder(queens[row])
+                sb[col] = 'Q'
+                queens[row] = sb.toString()
+                backTrack(row + 1,queens)
+                sb[col] = '.'
+                queens[row] = sb.toString()
+            }
+
+        }
+
+        fun isValid(queens: MutableList<String>,row: Int,col: Int):Boolean {
+            val n = queens.size
+            // 检查列上是否有冲突
+            for (i in 0 until n) {
+                if (queens[i][col] == 'Q'){
+                    return false
+                }
+            }
+
+            // 检查右上方是否有皇后冲突
+            var j = col + 1
+            for (i in row - 1 .. 0) {
+                if (j <= n) {
+                    if (queens[i][j] == 'Q') {
+                        return false
+                    }
+                }
+                j ++
+            }
+            // 检查左上方是否有皇后冲突
+            var k = col - 1
+            for (i in row - 1 .. 0) {
+                if (k>=0){
+                    if (queens[i][k] == 'Q') {
+                        return false
+                    }
+                }
+                k--
+            }
+            return true
+        }
     }
 }
