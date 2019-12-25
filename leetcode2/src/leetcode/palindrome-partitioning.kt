@@ -28,6 +28,7 @@ object PalindromeParitioning {
         /**
          * 思路： 回溯法
          * 通用框架
+         * https://leetcode-cn.com/problems/palindrome-partitioning/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-3-7/
          * res = []
          * backTrack(路径,选择集) {
          *     if 终止条件
@@ -41,23 +42,27 @@ object PalindromeParitioning {
          */
         fun partition(s: String): List<List<String>> {
             val ans = mutableListOf<MutableList<String>>()
-            backTrack(ans,s,0)
+            backTrack(ans,s,0, mutableListOf())
             return ans
         }
 
-        fun backTrack(res: MutableList<MutableList<String>> ,s:String,index: Int) {
+        /**
+         * https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-you-hua-jia-liao-dong-tai-gui-hua-by-liweiw/
+         */
+        fun backTrack(res: MutableList<MutableList<String>> ,s:String,index: Int,path: MutableList<String>) {
             if (index == s.length) {
+                res.add(path.toMutableList())
                 return
             }
-            val list = mutableListOf<String>()
-            for (i in index + 1 .. s.length) {
+            for (i in index  until  s.length) {
                 val subStr = s.substring(index,i)
-                if (checkPalindrome(subStr)) {
-                    list.add(subStr)
+                if (!checkPalindrome(subStr)) {
+                    continue
                 }
+                path.add(s.substring(index,i + 1))
+                backTrack(res,s,index + 1,path)
+                path.removeAt(path.size - 1)
             }
-            res.add(list)
-            backTrack(res,s,index + 1)
         }
 
         fun checkPalindrome(s: String) : Boolean {
