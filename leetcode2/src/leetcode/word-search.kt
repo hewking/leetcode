@@ -47,13 +47,15 @@ object WordSearch {
         fun exist(board: Array<CharArray>, word: String): Boolean {
             for (i in 0 until board.size) {
                 for (j in 0 until board[i].size) {
-                    return backTrack(board,word,i,j,0)
+                     if(backTrack(board,word,i,j,0)){
+                         return true
+                     }
                 }
             }
             return false
         }
 
-        val rows = intArrayOf(0,1,-1,1)
+        val rows = intArrayOf(0,1,0,-1)
         val cols = intArrayOf(1,0,-1,0)
 
         fun backTrack(board: Array<CharArray>,word:String,x: Int,y: Int,start: Int):Boolean {
@@ -65,7 +67,9 @@ object WordSearch {
             }
             board[x][y] = '.'
             for (i in 0 until 4) {
-                return backTrack(board,word,x + rows[i], y + cols[i],start)
+                if (backTrack(board,word,x + rows[i], y + cols[i],start + 1)){
+                    return true
+                }
             }
             board[x][y] = word[start]
             return false
