@@ -55,12 +55,12 @@ object PalindromeParitioning {
                 return
             }
             for (i in index  until  s.length) {
-                val subStr = s.substring(index,i)
+                val subStr = s.substring(index,i + 1)
                 if (!checkPalindrome(subStr)) {
                     continue
                 }
-                path.add(s.substring(index,i + 1))
-                backTrack(res,s,index + 1,path)
+                path.add(subStr)
+                backTrack(res,s,i + 1,path)
                 path.removeAt(path.size - 1)
             }
         }
