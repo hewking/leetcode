@@ -1,6 +1,5 @@
 package leetcode
 
-import java.util.*
 import kotlin.math.max
 
 /**
@@ -47,7 +46,10 @@ object LongestIncreasingSubsequence {
 
         var max = 0
 
-        fun lengthOfLIS(nums: IntArray): Int {
+        /**
+         * 回溯方式得到的是最长字串，而不是最长子序列
+         */
+        fun lengthOfLISubstr(nums: IntArray): Int {
             backTrack(nums,0)
             return max
         }
@@ -78,6 +80,32 @@ object LongestIncreasingSubsequence {
             return true
         }
 
+        /**
+         * 思路:
+         * https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-she-ji-fang-fa-zhi-pai-you-xi-jia/
+         * 动态规划
+         *
+         */
+        fun lengthOfLIS(nums: IntArray): Int {
+            if (nums.size == 1) {
+                return 1
+            }
+            // dp[i] 为nums数组中到 nums[i] 为止的最长子序列
+            val dp = IntArray(nums.size)
+            // dp 数组子序列，最短需要包含自身，所以长度至少1
+            dp.fill(1)
+            for (i in 0 until nums.size) {
+               for (j in 0 until i) {
+                   if (nums[i] > nums[j]) {
+                        dp[i] = Math.max(dp[i],dp[j] + 1)
+                   }
+               }
+            }
+            // dp 数组中的最大值，为LIS
+            return dp.reduce { acc, i ->
+                Math.max(acc,i)
+            }
+        }
 
     }
     @JvmStatic
