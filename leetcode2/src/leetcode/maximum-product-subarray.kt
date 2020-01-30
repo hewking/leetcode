@@ -59,8 +59,20 @@ object MaximumProductSubarray {
          * https://leetcode-cn.com/problems/maximum-product-subarray/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--36/
          */
         fun maxProduct(nums: IntArray): Int {
+            if (nums.isEmpty()) return 0
+            val n = nums.size
+            val dpMax = IntArray(n)
+            dpMax[0] = nums[0]
+            val dpMin = IntArray(n)
+            dpMin[0] = nums[0]
+            var max = nums[0]
+            for (i in 1 until n) {
+                dpMax[i] = Math.max(dpMin[i - 1] * nums[i] , Math.max(dpMax[i - 1] * nums[i],nums[i]))
+                dpMin[i] = Math.min(dpMin[i - 1] * nums[i] ,Math.min(dpMax[i - 1] * nums[1] ,nums[i]))
+                max = Math.max(max,dpMax[i])
 
-
+            }
+            return max
         }
     }
 }
