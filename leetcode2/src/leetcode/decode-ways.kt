@@ -37,7 +37,26 @@ object DecodeWays {
          * https://leetcode-cn.com/problems/decode-ways/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-2-3/
          */
         fun numDecodings(s: String): Int {
-
+            val len = s.length
+            val dp = IntArray(len + 1)
+            dp[len] = 1
+            if (s[len - 1] != '0') {
+                dp[len - 1] = 1
+            }
+            for (i in len -1 downTo 0) {
+                if (s[i] == '0') {
+                    continue
+                }
+                val ans1 = dp[i + 1]
+                var ans2 = 0
+                val ten = (s[i] - '0') * 10
+                val one = s[i + 1] - '0'
+                if (ten + one <= 26) {
+                    ans2 = dp[i + 2]
+                }
+                dp[i] = ans1 + ans2
+            }
+            return dp[0]
         }
     }
 }
