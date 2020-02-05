@@ -1,5 +1,7 @@
 package leetcode
 
+import java.util.*
+
 /**
  * 207. 课程表
     https://leetcode-cn.com/problems/course-schedule/
@@ -37,8 +39,68 @@ package leetcode
 object CourceSchedule {
 
     class Solution {
+
+        /**
+         * 思路：
+         * https://leetcode-cn.com/problems/course-schedule/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by--42/
+         */
         fun canFinish(numCourses: Int, prerequisites: Array<IntArray>): Boolean {
-            return false
+            // 每个节点的先修课数
+            val outNum = mutableMapOf<Int,Int>()
+            // 每个以key先修课节点的 list
+            val inNodes = mutableMapOf<Int,MutableList<Int>>()
+            // 所有节点
+            val set = hashSetOf<Int>()
+            for (i in 0 until prerequisites.size) {
+                val key = prerequisites[i][0]
+                val value = prerequisites[i][1]
+
+                set.add(key)
+                set.add(value)
+
+                if (!outNum.containsKey(key)) {
+                    outNum[key] = 0
+                }
+                if (!outNum.containsKey(value)) {
+                    outNum[value] = 0
+                }
+                outNum[key] = outNum[key]!!.plus(1)
+
+                if (!inNodes.containsKey(value)) {
+                    inNodes[value] = mutableListOf()
+                }
+                inNodes[value]!!.add(key)
+
+
+
+            }
+
+            // 将先修课树为0的节点加入到队列中
+            val queue = LinkedList<Int>()
+            for (k in set) {
+                if (outNum[k] == 0) {
+                    queue.offer(k)
+                }
+            }
+            while (!queue.isEmpty())  {
+                // 获取一个 将要删除的节点
+                val v = queue.poll()
+                val list = inNodes.getOrDefault(v, mutableListOf())
+                for (k in list) {
+                    val num = outNum[k]
+                    if (num == 0) {
+                        queue.offer(k)
+                    }
+                    outNum.put(k,num!! - 1)
+                }
+            }
+
+                for (k in set) {
+                    if (outNum.get(k) != 0) {
+                        return false
+                    }
+                }
+            return true
         }
     }
 
