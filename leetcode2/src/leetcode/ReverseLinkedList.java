@@ -1,5 +1,7 @@
 package leetcode;
 
+import leetcode.structure.ListNode;
+
 /**
  * Created by Administrator on 2016/9/13.
  * <p>
@@ -88,12 +90,6 @@ public class ReverseLinkedList {
             nextNode = head.next;
         }
         return p.next;
-    }
-
-    public class ListNode{
-        int val;
-        ListNode next;
-        ListNode(int x){val = x;}
     }
 
 }
