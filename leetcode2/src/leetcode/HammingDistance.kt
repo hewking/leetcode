@@ -32,7 +32,8 @@ object HammingDistance {
     fun main(args : Array<String>) {
         val s = Solution()
 //        print(s.toB(5))
-        s.hammingDistance(1,4)
+        val count = s.hammingDistance(1,4)
+        println("count:$count")
     }
 
     class Solution {
