@@ -27,37 +27,26 @@ import leetcode.structure.ListNode
 object  RemoveNthNodeFromEndOfList {
 
     class Solution {
+
+        /**
+         * 快慢指针法,当快指针到最后面时候，慢指针正好到中间。
+         * 如果我们给定一个index，这个值每次循环+1,然后，就可以通过与n的关系
+         * 删除一个节点即可
+         */
         fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
-            var reverseHead = reverseLinkedList(head)
-            var count = 0
-            var preNode = reverseHead
-            var curNode = preNode?.next
-            while (count < n - 1) {
-                curNode = curNode?.next
-                preNode = preNode?.next
-                count ++
+            var p = head
+            var slow = p
+            var fast = p
+            var index = 0
+            while (fast?.next != null) {
+                slow = slow?.next
+                fast = fast.next.next
+                index ++
+
             }
-            preNode?.next = curNode?.next
-            reverseHead = reverseLinkedList(reverseHead)
-            return reverseHead
+            return head
         }
 
-        fun reverseLinkedList(head: ListNode?): ListNode? {
-            if (head?.next == null) {
-                return head
-            }
-            val p = ListNode(-1)//拟一个头节点
-            p.next = head
-            var nextNode: ListNode? = head.next
-            while (nextNode != null) {
-                //后一个节点调整到最前
-                head.next = nextNode.next
-                nextNode.next = p.next
-                p.next = nextNode
-                nextNode = head.next
-            }
-            return p.next
-        }
     }
 
 }
