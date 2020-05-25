@@ -34,17 +34,22 @@ object  RemoveNthNodeFromEndOfList {
          * 删除一个节点即可
          */
         fun removeNthFromEnd(head: ListNode?, n: Int): ListNode? {
-            var p = head
-            var slow = p
-            var fast = p
-            var index = 0
-            while (fast?.next != null) {
-                slow = slow?.next
-                fast = fast.next.next
-                index ++
+            val dummy = ListNode(-1)
+        dummy.next = head
+        var first = dummy
+        var second = dummy
+        for (i in 1 .. n) {
+            first = first.next
+        }
 
-            }
-            return head
+        while(first != null && first.next != null) {
+            first = first.next
+            second = second.next
+        }
+
+        second.next = second.next.next
+
+        return dummy.next
         }
 
     }
